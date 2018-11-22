@@ -2,12 +2,10 @@
 
 import numpy as np 
 
-
 def stepFunction(t):
 	if t > 0:
 		return 1
 	return 0
-
 
 def prediction(X, W, b):
 	return(stepFunction(np.matmul(W, X) + b))
@@ -28,8 +26,6 @@ def perceptronStep(X, y, W, b, learn_rate = 0.01):
     return W, b
 
 
-import numpy as np
-
 # Write a function that takes as input a list of numbers, and returns
 # the list of values given by the softmax function.
 score = []
@@ -39,3 +35,13 @@ def softmax(L):
     for i in range(len(expL)):
         score.append(expL[i]/sumL)
     return score
+
+
+# Write a function that takes as input two lists Y, P,
+# and returns the float corresponding to their cross-entropy.
+def cross_entropy(Y, P):
+    CE = []
+    for i in range(len(Y)):
+        ce =  Y[i] * np.log(P[i]) + (1 - Y[i]) * np.log(1 - P[i]) 
+        CE.append(ce)
+    return -np.sum(CE)
