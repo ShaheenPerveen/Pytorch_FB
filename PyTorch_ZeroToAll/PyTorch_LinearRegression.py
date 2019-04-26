@@ -1,33 +1,15 @@
 #!/usr/bin/env python
-# coding: utf-8
 # Creating a simple linear regression model using PyTorch
-# In[ ]:
 
 
 import torch
-
-
-# In[2]:
-
-
 from torch.autograd import Variable
-
-
-# In[3]:
 
 
 x_data = Variable(torch.tensor([[1.0], [2.0], [3.0]]))
 y_data = Variable(torch.tensor([[2.0], [4.0], [6.0]]))
 
-
-# In[4]:
-
-
 x_data.data
-
-
-# In[20]:
-
 
 class Model(torch.nn.Module):
     """
@@ -47,8 +29,6 @@ class Model(torch.nn.Module):
         return y_pred
 
 
-# In[21]:
-
 
 # Model.parameters
 model = Model()
@@ -57,7 +37,8 @@ model = Model()
 # In[22]:
 
 
-""" Construct our loss function and the optimizer(using predefined ones from PyTorch API)
+""" 
+    Construct our loss function and the optimizer(using predefined ones from PyTorch API)
     We are calling Model.parameters() inside SGD as it contains the trainable parameter of nn.Linear Module
 """
 
@@ -79,35 +60,17 @@ for epoch in range(100):
     loss.backward()
     optimizer.step()
     
-    
-    
-
-
-# In[12]:
-
 
 # using the model for prediction
 test = Variable(torch.tensor([[4.0]]))
 print("prediction for test", 4, model.forward(test))
 
 
-# In[9]:
-
-
 from graphviz import Digraph
 from torchviz import make_dot
-
-
-# In[10]:
-
 
 # visualizing your dynamic computational graph
 l = model(x_data)
 make_dot(l.mean(), params=dict(model.named_parameters()))
-
-
-# In[ ]:
-
-
 
 
